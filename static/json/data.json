@@ -1,0 +1,25 @@
+{
+  "thirdLogin":[
+    {"name":"微信","path":"static/images/wx.png"},
+    {"name":"QQ","path":"static/images/qq.png"},
+    {"name":"微博","path":"static/images/wb.png"},
+    {"name":"支付宝","path":"static/images/zfb.png"}
+  ],
+  "navList":[
+    {"name":"文化","id":1},
+    {"name":"娱乐","id":2},
+    {"name":"时尚","id":3},
+    {"name":"生活","id":4},
+    {"name":"科技","id":5},
+    {"name":"旅行","id":6},
+    {"name":"电影","id":7},
+    {"name":"音乐","id":8},
+    {"name":"体育","id":9},
+    {"name":"动漫","id":10},
+    {"name":"星座","id":11},
+    {"name":"历史","id":12},
+    {"name":"搞笑","id":13},
+    {"name":"本地","id":14},
+    {"name":"国外","id":15}
+  ]
+}

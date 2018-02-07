@@ -1,0 +1,26 @@
+{
+  "thirdLogin":[
+    {"name":"微信","path":"static/images/wx.png"},
+    {"name":"QQ","path":"static/images/qq.png"},
+    {"name":"微博","path":"static/images/wb.png"},
+    {"name":"支付宝","path":"static/images/zfb.png"}
+  ],
+  "navList":[
+    {"name":"精选","id":"jingxuan"},
+    {"name":"文化","id":"wenhua"},
+    {"name":"娱乐","id":"yule"},
+    {"name":"时尚","id":"shishang"},
+    {"name":"生活","id":"shenghuo"},
+    {"name":"科技","id":"keji"},
+    {"name":"旅行","id":"lvxing"},
+    {"name":"电影","id":"dianying"},
+    {"name":"音乐","id":"yinyue"},
+    {"name":"体育","id":"tiyu"},
+    {"name":"动漫","id":"dongman"},
+    {"name":"星座","id":"xingzuo"},
+    {"name":"历史","id":"lishi"},
+    {"name":"搞笑","id":"gaoxiao"},
+    {"name":"本地","id":"bendi"},
+    {"name":"国外","id":"guowai"}
+  ]
+}
