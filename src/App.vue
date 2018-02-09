@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- <img src="./assets/logo.png"> -->
-    <my-header :title="title.text" :menu-display="menuDisplay" :back-display="backDisplay" :map-display="mapDisplay" v-show="title.bools"></my-header>
+    <my-header :title="title.text" :menu-display="menuDisplay" :back-display="backDisplay" :mapDisplay="title.bools" v-show="title.bools"></my-header>
     <div class="content" :class="{tabar: tabar,cheader:cheader}">
       <transition name="slide-left">
         <router-view></router-view>
@@ -15,10 +15,14 @@
 <script>
   import myFooter from './components/footer/footer.vue';
   import myHeader from '@/components/header/header.vue'
+
+  import { mapGetters, mapActions } from 'vuex'
 export default {
   data(){
     return{
 //      ctabar:this.tabar
+      bools:false,
+      text:""
     }
   },
   name: 'App',
@@ -26,8 +30,20 @@ export default {
     myFooter,
     myHeader
   },
+  watch: {
+    // 如果路由有变化，会再次执行该方法
+    '$route': 'hideMenuSlide'
+  },
+  methods: {
+    ...mapActions({ setNavState: 'setNavState' }),
+    // 隐藏MenuSlide
+    hideMenuSlide() {
+      this.setNavState(false)
+    }
+  },
   computed:{
     title () {
+      console.log(this.$route.path.split('/')[1])
       switch (this.$route.path.split('/')[1]) {
         case '':
           return {
@@ -80,9 +96,11 @@ export default {
       return false
     }
   },
-//  mounted(){
-//    console.log(this.tabar)
-//  }
+  mounted(){
+    this.title;
+  },
+  mothed:{
+  }
 }
 </script>
 

@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import Login from '@/views/login/login.vue'
+import Login from '@/components/login.vue'
+import Regist from '@/components/regist.vue'
+// import Login from '@/views/login/login.vue'
 import Home from '@/views/home/home.vue'
 import Topic from '@/views/topic/topic.vue'
 import Concern from '@/views/concern/concern.vue'
@@ -13,7 +14,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/login',
+      path: '/host/login',
       name: 'Login',
       component: Login
     },
@@ -43,9 +44,14 @@ export default new Router({
       component: Host
     },
     {
-      path: '/changeNav',
+      path: '/topic/changeNav',
       name: 'ChangeNav',
       component: ChangeNav
+    },
+    {
+      path: '/host/regist',
+      name: 'Regist',
+      component: Regist
     }
   ]
 })

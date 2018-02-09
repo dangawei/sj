@@ -1,5 +1,5 @@
 <template>
-  <section id="foot_guide">
+  <section id="foot_guide" v-show="isShowTabbar">
     <section @click = "gotoAddress('/')" class="guide_item">
       <div class="icon_style">
         <img src="../../assets/images/hbao.png" alt="话报">
@@ -33,6 +33,12 @@
     data(){
       return{
 
+      }
+    },
+    computed:{
+      isShowTabbar(){
+        let routeLength = this.$route.path.split('/').length
+        return routeLength > 2 ? false : true
       }
     },
     methods:{

@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <div class="title"></div>
+    <div class="title">welcome to love720</div>
     <div class="coordinates-icon">
       <div class="coordinates topAct">
         <img src="../assets/images/logo.png" />
@@ -15,26 +15,42 @@
                     <span class="eamil-icon common-icon">
                         <i class="icon">&#xe601;</i>
                     </span>
-          <input type="text" name="username" v-model="username" placeholder="手机号" />
+          <input type="text" v-model="username" placeholder="手机号" />
         </div>
         <div class="user-pasw common-div">
                     <span class="pasw-icon common-icon">
                         <i class="icon">&#xe687;</i>
                     </span>
-          <input type="password" name="password" v-model="password" placeholder="密码" />
+          <input type="password" v-model="password" placeholder="密码" />
         </div>
-        <div class="login-btn" @click="_login">登录</div>
+        <div class="user-code common-div">
+                    <span class="pasw-icon common-icon">
+                        <i class="icon">&#xe687;</i>
+                    </span>
+          <input type="text" style="width: 50%;" v-model="verificode" placeholder="验证码" />
+          <span class="verifi-code" @click="getVerifiCode" v-show="!sendCode">
+                        获取验证码
+                    </span>
+          <span class="verifi-code readonly" v-show="sendCode">
+                        {{timeOut}}秒重新获取
+                    </span>
+        </div>
+        <div class="login-btn" @click="regist">注册</div>
       </form>
     </div>
     <div class="forgets">
-      <router-link to="">忘记密码?</router-link>
-      <router-link to="/host/regist">新来的?注册</router-link>
+      <router-link to=""></router-link>
+      <router-link to="/host/login">已有账号?登录>></router-link>
     </div>
   </div>
 </template>
 
 <script>
+
   import { mapActions } from 'vuex'
+
+  const REG_PHONE = '/^1[34578]\d{9}$/'
+
   import api from '../fetch/api'
   import * as _ from '../lib/tool'
 
@@ -43,26 +59,70 @@
     data() {
       return {
         username: '',
-        password: ''
+        password: '',
+        verificode: '',
+        sendCode: false,
+        timeOut: 60
       }
     },
-    methods: {
-      ...mapActions({ setUserInfo: 'setUserInfo' }),
+    // computed: {
+    //     sendCode() {
 
-      // 用户登录
-      _login() {
-        if (!this.username || !this.password) {
+    //     }
+    // },
+    methods: {
+      getVerifiCode () {
+        if (!this.username) {
+          _.alert('请输入手机号')
+          return
+        }
+        api.RegistVerifiCode(this.username)
+          .then(res => {
+            this.sendCode = true
+            this.setTimeOut()
+          })
+          .catch(err => {
+            _.alert('短信发送失败')
+          })
+        // if (!REG_PHONE.test(this.username)) {
+        //     alert('请输入有效手机号')
+        //     return
+        // }
+      },
+      setTimeOut () {
+        let timer = setTimeout(() => {
+          this.setTimeOut()
+          if(this.timeOut > 0) {
+            this.timeOut--
+          }
+        }, 1000)
+        if(this.timeOut <= 0) {
+          this.sendCode = false
+          this.timeOut = 60
+          clearTimeout(timer)
+        }
+      },
+      regist () {
+        if (!this.username || !this.password || !this.verificode) {
           _.alert('请填写完整')
           return
         }
+        // if (!('/^1[34578]\d{9}$/').test(this.username)) {
+        //     alert('请输入有效手机号')
+        //     return
+        // }
+        // if (!('/^\w{6,15}$/').test(this.password)) {
+        //     alert('请设置6－15位密码，可以使用数字、字母及下划线')
+        //     return;
+        // }
         let data = {
-          username: this.username,
-          password: this.password
+          tellphone: this.username,
+          password: this.password,
+          verificode: this.verificode
         }
         this.$store.dispatch('setLoadingState', true)
-        api.Login(data)
+        api.Regist(data)
           .then(res => {
-            console.log(res)
             if(res.success) {
               // let userInfo = Object.assign()
               this.$store.dispatch('setLoadingState', false)
@@ -94,7 +154,7 @@
       overflow:hidden;
       font-size:18px;
       text-align:center;
-      height:px2rem(200px);
+      line-height:px2rem(200px);
       color:#fff;
     }
     .coordinates-icon{
@@ -186,8 +246,22 @@
           font-size:16px;
           color:#fff;
         }
+        .verifi-code {
+          display: inline-block;
+          width: px2rem(200px);
+          height: px2rem(80px);
+          line-height: px2rem(80px);
+          background: #0bd38a;
+          color: #fff;
+          text-align: center;
+          padding-left: px2rem(20px);
+        }
+        .readonly {
+          background: #eee;
+          color: #555;
+        }
       }
-      .user-name,.user-pasw{
+      .user-name,.user-pasw,.user-code{
         background-color:rgba(255,255,255,0.1);
       }
       .login-btn{

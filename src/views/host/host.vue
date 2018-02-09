@@ -6,8 +6,8 @@
           <img src="../../assets/images/user-img0.jpg" alt="">
         </div>
         <div class="u-button">
-          <router-link to="/login" class="t-login">登录</router-link>
-          <router-link to="/regist" class="t-regist">注册</router-link>
+          <router-link to="/host/login" class="t-login">登录</router-link>
+          <router-link to="/host/regist" class="t-regist">注册</router-link>
         </div>
       </div>
     </div>
@@ -48,13 +48,13 @@
           </router-link>
         </li>
         <li>
-          <router-link to="">
+          <router-link to="/user/concern">
             <span class="num" v-show="loginStatus">{{pubTosportNum}}</span>
             <span>关注</span>
           </router-link>
         </li>
         <li>
-          <router-link to="">
+          <router-link to="/user/interest">
             <span class="num" v-show="loginStatus">{{pubTotravelNum}}</span>
             <span>兴趣</span>
           </router-link>
@@ -72,7 +72,7 @@
   import group from '@/components/group'
 
   import { mapGetters } from 'vuex'
-//  import api from '../fetch/api.js'
+  import api from '../../fetch/api.js'
 
   export default {
 
@@ -92,7 +92,7 @@
         ],
         cellLists3: [
           { link: 'user/set', iconUrl: 'http://hzzly.net/xyy-vue/images/user-set.png', text: '设置', desc: '', badg: '', more: true },
-          { link: '', iconUrl: 'http://hzzly.net/xyy-vue/images/user-call.png', text: '联系客服', desc: '18679168426', badg: '', more: true }
+          { link: '', iconUrl: 'http://hzzly.net/xyy-vue/images/user-call.png', text: '联系客服', desc: '18437980371', badg: '', more: true }
         ],
         pubTotravelNum: 0,
         pubTosportNum: 0

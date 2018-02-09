@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import VueResource from 'vue-resource'
+import user from './user'
+import com from './com'
 
 Vue.use(Vuex)
 Vue.use(VueResource)
@@ -72,15 +74,40 @@ export default new Vuex.Store({
         resolve()
       })
     },
-    // acGetData({ commit,state }, channel) {
-    //   return new Promise((resolve, reject) => {
-    //     axios.get('/api/channel/' + channel)
-    //       .then(res => {
-    //         commit('muGetData', res.data.result.list)
-    //         store.state.load = false
-    //       })
-    //     resolve()
-    //   })
-    // }
+    acGetData({ commit,state }, channel) {
+      return new Promise((resolve, reject) => {
+        axios.get('/api/channel/' + channel)
+          .then(res => {
+            commit('muGetData', res.data.result.list)
+            store.state.load = false
+          })
+        resolve()
+      })
+    },
+    showToast({ commit }, status) {
+      commit(commit(showToast), status)
+    },
+    showSuccess({ commit }, status) {
+      commit(commit(showSuccess), status)
+    },
+    showFail({ commit }, status) {
+      commit(commit(showFail), status)
+    },
+    toastMsg({ commit }, str) {
+      commit(commit(toastMsg), str)
+    },
+    showAlert({ commit }, status) {
+      commit(commit(showAlert), status)
+    },
+    alertMsg({ commit }, str) {
+      commit(commit(alertMsg), str)
+    },
+    showTimePicker({ commit }, status) {
+      commit(commit(showTimePicker), status)
+    }
+  },
+  modules: {
+    user,
+    com
   }
 })
